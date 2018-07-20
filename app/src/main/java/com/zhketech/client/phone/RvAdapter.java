@@ -36,6 +36,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder>{
 
     @Override
     public void onBindViewHolder(RvHolder holder, final int position) {
+        holder.itemView.setBackgroundResource(R.drawable.ripple_bg);
         holder.nameTv.setText(mDevices.get(position).getName()+":"+mDevices.get(position).getAddress());
         //点击事件 点击配对
         if (onItemClickListener!=null) {

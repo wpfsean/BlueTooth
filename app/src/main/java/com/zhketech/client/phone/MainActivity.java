@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.send).setOnClickListener(this);
         inputEt = (EditText) findViewById(R.id.input);
 
+
         mRecyclerView = (RecyclerView) findViewById(R.id.devices);
+        mRecyclerView.addItemDecoration(new SpaceItemDecoration(30));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRvAdapter = new RvAdapter(this);
         mRecyclerView.setAdapter(mRvAdapter);
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (action) {
                 case BluetoothDevice.ACTION_FOUND:
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    Toast.makeText(MainActivity.this, "找到设备" + device.getName(), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(MainActivity.this, "找到设备" + device.getName(), Toast.LENGTH_SHORT).show();
                     if (mRvAdapter != null) {
                         mRvAdapter.addDevice(device);
                     }
