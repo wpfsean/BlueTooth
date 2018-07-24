@@ -1,4 +1,4 @@
-package com.zhketech.client.phone;
+package com.zhketech.client.phone.utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
