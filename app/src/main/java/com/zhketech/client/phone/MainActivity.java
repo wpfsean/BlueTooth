@@ -36,6 +36,9 @@ import java.util.UUID;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 主頁面.用於跳轉到不同的模塊
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -45,9 +48,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
     }
-
-
-    @OnClick(R.id.bluetooth_btn_layout)
+    @OnClick({R.id.bluetooth_btn_layout,R.id.setting_btn_layout,R.id.login_btn_layout,R.id.viewpager_btn_layout})
     public void onclickEvent(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -55,9 +56,19 @@ public class MainActivity extends AppCompatActivity {
                 intent.setClass(MainActivity.this, BlueToothActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.setting_btn_layout:
+                intent.setClass(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.login_btn_layout:
+                intent.setClass(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewpager_btn_layout:
+                intent.setClass(MainActivity.this, ViewPagerActivity.class);
+                startActivity(intent);
+                break;
+
         }
-
     }
-
-
 }

@@ -21,7 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BlueToothActivity"></activity>
+        <activity android:name=".BlueToothActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ViewPagerActivity"></activity>
     </application>
 
 </manifest>

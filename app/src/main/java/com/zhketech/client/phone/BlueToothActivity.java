@@ -36,6 +36,11 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
+/**
+ *藍牙設置中心
+ * 掃描藍牙設備
+ * 連接通信
+ */
 public class BlueToothActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int REQUEST_BT_ENABLE_CODE = 200;
     public static final String BT_UUID = "00001101-0000-1000-8000-00805F9B34FB";//uuid
