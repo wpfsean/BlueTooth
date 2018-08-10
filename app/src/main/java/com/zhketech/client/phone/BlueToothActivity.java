@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
@@ -18,10 +19,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleGattCallback;
+import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.exception.BleException;
 import com.zhketech.client.phone.utils.MsgAdapter;
 import com.zhketech.client.phone.utils.RvAdapter;
 import com.zhketech.client.phone.utils.SpaceItemDecoration;
@@ -69,7 +75,17 @@ public class BlueToothActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue_tooth);
-        //这是我是为了6.0以上的设备能搜索到结果，动态申请了位置权限。但是没有处理结果，因为我测试肯定点同意~- -
+
+        BleManager.getInstance().init(getApplication());
+        BleManager.getInstance()
+                .enableLog(true)
+                .setReConnectCount(1, 5000)
+                .setSplitWriteNum(20)
+                .setConnectOverTime(10000)
+                .setOperateTimeout(5000);
+
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
         }
@@ -93,9 +109,47 @@ public class BlueToothActivity extends AppCompatActivity implements View.OnClick
         mRecyclerView.setAdapter(mRvAdapter);
         mRvAdapter.setOnItemClickListener(new RvAdapter.OnItemClickListener() {
             @Override
-            public void onClick(BluetoothDevice device) {
+            public void onClick(final BluetoothDevice device) {
+
+
+                BleManager.getInstance().connect(device.getAddress(), new BleGattCallback() {
+                    @Override
+                    public void onStartConnect() {
+                        Log.i("TAG","onStartConnect");
+                    }
+
+                    @Override
+                    public void onConnectFail(BleDevice bleDevice, BleException exception) {
+                        Log.i("TAG","onConnectFail:"+exception.getDescription());
+                    }
+
+                    @Override
+                    public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
+                        Log.i("TAG","onConnectSuccess:"+bleDevice.getName());
+                    }
+
+                    @Override
+                    public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
+
+                    }
+                });
+
+
+
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.i("TAG",device.getAddress()+"ddddddddddddd");
+//                    }
+//                });
                 mConnectThread = new BlueToothActivity.ConnectThread(device);
                 mConnectThread.start();
+
+
+
+
+
+
             }
         });
 

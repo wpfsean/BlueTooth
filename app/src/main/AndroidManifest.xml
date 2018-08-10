@@ -24,7 +24,15 @@
         <activity android:name=".BlueToothActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ViewPagerActivity"></activity>
+        <activity android:name=".ViewPagerActivity" />
+
+        <service
+            android:name=".TimeToDoService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".UpdateItemActivity" />
+        <activity android:name=".CameraActivity" />
     </application>
 
 </manifest>

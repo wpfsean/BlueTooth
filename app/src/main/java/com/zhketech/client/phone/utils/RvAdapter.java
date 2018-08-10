@@ -3,6 +3,7 @@ package com.zhketech.client.phone.utils;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvHolder>{
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.i("TAG",mDevices.get(position).getAddress());
                     onItemClickListener.onClick(mDevices.get(position));
                 }
             });

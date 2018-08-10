@@ -38,6 +38,23 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Viewpager" />
+
+
+            <Button
+                android:id="@+id/start_services_btn_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="启动services" />
+
+
+            <Button
+                android:id="@+id/viewpage_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="ViewPagerAndFragment"
+                android:textAllCaps="false"
+
+                />
         </LinearLayout>
 
 
